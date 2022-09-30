@@ -1,6 +1,6 @@
 # Changelog
 
-[`sh1106`](https://crates.io/crates/sh1106) is a Rust driver for the SH1106 OLED display. It supports
+[`sh1107`](https://crates.io/crates/sh1107) is a Rust driver for the SH1107 OLED display. It supports
 [embedded-graphics](https://crates.io/crates/embedded-graphics) or raw pixel drawing modes and works
 with the [embedded-hal](crates.io/crates/embedded-hal) traits for maximum portability.
 
@@ -18,11 +18,11 @@ with the [embedded-hal](crates.io/crates/embedded-hal) traits for maximum portab
 
 ### Fixed
 
-- [#23](https://github.com/jamwaffles/sh1106/pull/23) Fixed command bytes for `PreChargePeriod` and `VcomhDeselect`.
+- First working version with sh1107, still has some quirks but uses the full display.
 
-## [0.3.3] - 2020-06-09
+## [0.3.4] - 2021-05-02
 
-### Added
+### Created
 
 - [#22](https://github.com/jamwaffles/sh1106/pull/22) Add `DisplaySize::Display128x64NoOffset` variant for 128x64 displays that don't use a 132x64 buffer internally.
 
@@ -97,3 +97,4 @@ Upgrade to new embedded-graphics `0.6.0-alpha.1` release. Please see the [embedd
 [0.3.0]: https://github.com/jamwaffles/sh1106/compare/v0.3.0-alpha.4...v0.3.0
 [0.3.0-alpha.4]: https://github.com/jamwaffles/sh1106/compare/v0.3.0-alpha.3...v0.3.0-alpha.4
 [0.3.0-alpha.3]: https://github.com/jamwaffles/sh1106/compare/v0.3.0-alpha.2...v0.3.0-alpha.3
+- Forked from https://github.com/jamwaffles/sh1106.

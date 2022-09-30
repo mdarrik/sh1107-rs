@@ -1,4 +1,4 @@
-//! sh1106 Communication Interface (I2C/SPI)
+//! sh1107 Communication Interface (I2C/SPI)
 //!
 //! These are the two supported interfaces for communicating with the display. They're used by the
 //! [builder](../builder/index.html) methods
@@ -9,12 +9,14 @@
 //! a type alias. Here's an example for the I2C1 on an STM32F103xx:
 //!
 //! ```rust
-//! # use stm32f1xx_hal::gpio::gpiob::{PB8, PB9};
-//! # use stm32f1xx_hal::gpio::{Alternate, OpenDrain};
-//! # use stm32f1xx_hal::i2c::I2c;
-//! # use stm32f1xx_hal::prelude::*;
-//! # use stm32f1xx_hal::pac::I2C1;
-//! # use sh1106::{interface::I2cInterface, mode::GraphicsMode, Builder};
+//! # extern crate sh1107;
+//! # extern crate stm32f103xx_hal as hal;
+//! # use hal::gpio::gpiob::{PB8, PB9};
+//! # use hal::gpio::{Alternate, OpenDrain};
+//! # use hal::i2c::I2c;
+//! # use hal::prelude::*;
+//! # use hal::stm32f103xx::I2C1;
+//! # use sh1107::interface::I2cInterface;
 //! type OledDisplay = GraphicsMode<
 //!     I2cInterface<I2c<I2C1, (PB8<Alternate<OpenDrain>>, PB9<Alternate<OpenDrain>>)>>,
 //! >;
@@ -23,13 +25,14 @@
 //! Here's one for SPI1 on an STM32F103xx:
 //!
 //! ```rust
-//! # use stm32f1xx_hal::gpio::gpioa::{PA5, PA6, PA7};
-//! # use stm32f1xx_hal::gpio::gpiob::PB1;
-//! # use stm32f1xx_hal::gpio::{Alternate, Floating, Input, Output, PushPull};
-//! # use stm32f1xx_hal::spi;
-//! # use stm32f1xx_hal::spi::Spi;
-//! # use stm32f1xx_hal::pac::SPI1;
-//! # use sh1106::{interface::SpiInterface, mode::GraphicsMode};
+//! # extern crate sh1107;
+//! # extern crate stm32f103xx_hal as hal;
+//! # use hal::gpio::gpioa::{PA5, PA6, PA7};
+//! # use hal::gpio::gpiob::PB1;
+//! # use hal::gpio::{Alternate, Floating, Input, Output, PushPull};
+//! # use hal::spi::Spi;
+//! # use hal::stm32f103xx::SPI1;
+//! # use sh1107::interface::SpiInterface;
 //! pub type OledDisplay = GraphicsMode<
 //!     SpiInterface<
 //!         Spi<
@@ -51,7 +54,7 @@
 pub mod i2c;
 pub mod spi;
 
-/// A method of communicating with sh1106
+/// A method of communicating with sh1107
 pub trait DisplayInterface {
     /// Interface error type
     type Error;

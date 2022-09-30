@@ -1,11 +1,11 @@
-//! SH1106 I2C Interface
+//! SH1107 I2C Interface
 
 use hal;
 
 use super::DisplayInterface;
 use crate::{command::Page, Error};
 
-/// SH1106 I2C communication interface
+/// SH1107 I2C communication interface
 pub struct I2cInterface<I2C> {
     i2c: I2C,
     addr: u8,
@@ -15,7 +15,7 @@ impl<I2C> I2cInterface<I2C>
 where
     I2C: hal::blocking::i2c::Write,
 {
-    /// Create new sh1106 I2C interface
+    /// Create new sh1107 I2C interface
     pub fn new(i2c: I2C, addr: u8) -> Self {
         Self { i2c, addr }
     }
@@ -42,8 +42,8 @@ where
     }
 
     fn send_data(&mut self, buf: &[u8]) -> Result<(), Self::Error> {
-        // Display is always 128px wide
-        const CHUNKLEN: usize = 128;
+        // TODO: figure out a way to pass chunklen in, should likely always be 64 for sh1107, but the sh1106 was doing 128
+        const CHUNKLEN: usize = 64;
 
         const BUFLEN: usize = CHUNKLEN + 1;
 

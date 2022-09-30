@@ -1,4 +1,4 @@
-//! sh1106 OLED display driver
+//! sh1107 OLED display driver
 //!
 //! The driver must be initialised by passing an I2C or SPI interface peripheral to the
 //! [`Builder`](builder/struct.Builder.html),
@@ -23,7 +23,7 @@
 //! display.flush().unwrap();
 //! ```
 //!
-//! See the [example](https://github.com/jamwaffles/sh1106/blob/master/examples/graphics_i2c.rs)
+//! See the [example](https://github.com/aaron-hardin/sh1107/blob/master/examples/graphics_i2c.rs)
 //! for more usage. The [entire `embedded_graphics` featureset](https://github.com/jamwaffles/embedded-graphics#features)
 //! is supported by this driver.
 //!
@@ -33,7 +33,7 @@
 //! # Examples
 //!
 //! Examples can be found in
-//! [the examples/ folder](https://github.com/jamwaffles/sh1106/blob/master/examples)
+//! [the examples/ folder](https://github.com/aaron-hardin/sh1107/blob/master/examples)
 //!
 //! ## Draw some text to the display
 //!
@@ -49,10 +49,18 @@
 //! use sh1106::{prelude::*, Builder};
 //! # let i2c = sh1106::test_helpers::I2cStub;
 //!
-//! let mut display: GraphicsMode<_> = Builder::new().connect_i2c(i2c).into();
+//! extern crate cortex_m;
+//! extern crate embedded_graphics;
+//! extern crate embedded_hal as hal;
+//! extern crate panic_abort;
+//! extern crate sh1107;
+//! extern crate stm32f103xx_hal as blue_pill;
 //!
-//! display.init().unwrap();
-//! display.flush().unwrap();
+//! use blue_pill::i2c::{DutyCycle, I2c, Mode};
+//! use blue_pill::prelude::*;
+//! use embedded_graphics::fonts::Font6x8;
+//! use embedded_graphics::prelude::*;
+//! use sh1107::{mode::GraphicsMode, Builder};
 //!
 //! let text_style = MonoTextStyleBuilder::new()
 //!     .font(&FONT_6X10)
