@@ -42,6 +42,7 @@
 //! display.flush().unwrap();
 //! ```
 
+use embedded_graphics_core::primitives::PointsIter;
 use hal::{blocking::delay::DelayMs, digital::v2::OutputPin};
 
 use crate::{
@@ -225,6 +226,33 @@ where
             });
 
         Ok(())
+    }
+
+    fn fill_contiguous<I>(
+        &mut self,
+        area: &embedded_graphics_core::primitives::Rectangle,
+        colors: I,
+    ) -> Result<(), Self::Error>
+    where
+        I: IntoIterator<Item = Self::Color>,
+    {
+        self.draw_iter(
+            area.points()
+                .zip(colors)
+                .map(|(pos, color)| Pixel(pos, color)),
+        )
+    }
+
+    fn fill_solid(
+        &mut self,
+        area: &embedded_graphics_core::primitives::Rectangle,
+        color: Self::Color,
+    ) -> Result<(), Self::Error> {
+        self.fill_contiguous(area, core::iter::repeat(color))
+    }
+
+    fn clear(&mut self, color: Self::Color) -> Result<(), Self::Error> {
+        self.fill_solid(&self.bounding_box(), color)
     }
 }
 

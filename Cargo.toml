@@ -1,5 +1,9 @@
 [package]
-authors = ["Darrik Moberg <30670444+mdarrik@users.noreply.github.com>","aaron-hardin <aaronrhardin@gmail.com>", "James Waples <james@wapl.es>"]
+authors = [
+    "Darrik Moberg <30670444+mdarrik@users.noreply.github.com>",
+    "aaron-hardin <aaronrhardin@gmail.com>",
+    "James Waples <james@wapl.es>",
+]
 categories = ["embedded", "no-std"]
 description = "I2C/SPI driver for the SH1107 OLED display controller"
 documentation = "https://docs.rs/sh1107"
@@ -13,7 +17,7 @@ version = "0.4.0"
 edition = "2018"
 
 [package.metadata.docs.rs]
-targets = [ "thumbv7m-none-eabi", "thumbv7em-none-eabihf" ]
+targets = ["thumbv7m-none-eabi", "thumbv7em-none-eabihf"]
 
 [dependencies]
 embedded-hal = "0.2.3"
@@ -29,11 +33,15 @@ cortex-m-rtic = "0.5.9"
 
 [dev-dependencies.stm32f1xx-hal]
 version = "0.7.0"
-features = [ "rt", "stm32f103" ]
+features = ["rt", "stm32f103"]
 
 [features]
 default = ["graphics"]
 graphics = ["embedded-graphics-core"]
+
+[patch.crates-io]
+embedded-graphics = { git = "https://github.com/embedded-graphics/embedded-graphics" }
+embedded-graphics-core = { git = "https://github.com/embedded-graphics/embedded-graphics" }
 
 [profile.dev]
 codegen-units = 1
